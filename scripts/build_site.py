@@ -17,6 +17,17 @@ SITE_TITLE = "Дмитрий Морозов"
 SITE_SUBTITLE = "Стихотворения"
 AUTHOR_PROFILE_URL = "https://stihi.ru/avtor/dmorozov"
 
+AUTHOR_NAME = "Денис"
+AUTHOR_PHOTO = "images/denis-portrait.jpg"
+AUTHOR_BIO = (
+    "Денис родился в Риге в 2003 году и сейчас учится на медицинском факультете. "
+    "Стихи он пишет с детства — эта привычка появилась ещё в школьные годы и "
+    "осталась с ним по сей день. «Здравствуй» стал его первым персональным "
+    "сборником, а до этого стихотворения уже выходили в поэтических альманахах "
+    "Латвии и России. Денис несколько раз читал свои стихи вживую — на "
+    "творческих вечерах и благотворительных мероприятиях."
+)
+
 MONTHS_RU = [
     "января", "февраля", "марта", "апреля", "мая", "июня",
     "июля", "августа", "сентября", "октября", "ноября", "декабря",
@@ -61,6 +72,17 @@ def poem_to_html(poem):
     </article>"""
 
 
+def about_section_html():
+    return f"""
+    <section class="about" id="about">
+      <img class="about__photo" src="{AUTHOR_PHOTO}" alt="Карандашный портрет {AUTHOR_NAME}а" width="986" height="1280" loading="lazy">
+      <div class="about__text">
+        <h2 class="about__title">Об авторе</h2>
+        <p>{escape(AUTHOR_BIO)}</p>
+      </div>
+    </section>"""
+
+
 def toc_entry(poem):
     first_line = normalize_poem_text(poem["text"]).split("\n", 1)[0]
     return f"""        <li>
@@ -79,6 +101,7 @@ def main():
 
     toc_html = "\n".join(toc_entry(p) for p in poems)
     poems_html = "\n".join(poem_to_html(p) for p in poems)
+    about_html = about_section_html()
 
     page = f"""<!doctype html>
 <html lang="ru">
@@ -108,6 +131,7 @@ def main():
     <button class="icon-btn" data-nav-close aria-label="Закрыть оглавление" style="display:none"></button>
     <p class="site-nav__title">{SITE_TITLE}</p>
     <p class="site-nav__subtitle">{SITE_SUBTITLE}</p>
+    <a class="about-link" href="#about">Об авторе</a>
     <ul class="toc">
 {toc_html}
     </ul>
@@ -119,6 +143,7 @@ def main():
         <h1>{SITE_SUBTITLE}</h1>
         <p>Собрание стихотворений {SITE_TITLE}, впервые опубликованных на Стихи.ру. {len(poems)} стихотворений, от ранних до последних.</p>
       </div>
+{about_html}
 {poems_html}
 
       <footer class="site-footer">
