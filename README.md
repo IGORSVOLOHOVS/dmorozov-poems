@@ -47,3 +47,7 @@ holds the rules.
 None, on purpose. The poems and the portrait are another person's work, so all
 rights stay with their owner, and a licence here is the author's decision. See
 the R-18 exception below.
+
+## Lab requirements
+
+This repository complies with [revision 4.0.0](http://127.0.0.1:3000/igors-lab/software-requirements/src/tag/v4.0.0/BEST_REQUIREMENTS.md) of the lab requirements, except R-02 (#7), R-09 (#8), R-18 (#9), R-37 (#10), R-41 (#11), R-42 (#12).
