@@ -1,27 +1,49 @@
-# Дмитрий Морозов — Стихотворения
+# dmorozov-poems
 
-Статичный сайт со стихотворениями, впервые опубликованными автором на [Стихи.ру](https://stihi.ru/avtor/dmorozov).
+A static site that collects 50 Russian poems first published by their author on
+[stihi.ru](https://stihi.ru/avtor/dmorozov). The poems are the author's own, not
+Igors Volohovs's: this repository only presents them.
 
-## Структура
+The page text and the poems are in Russian and stay that way. That is this
+repository's R-37 exception: nobody translates someone else's poems here.
 
-- `index.html` — готовая статичная страница (сгенерирована из `data/poems.json`)
-- `css/style.css`, `js/main.js` — стили и минимальный JS (тема, мобильное меню, скролл)
-- `data/poems.json` — тексты стихотворений
-- `scripts/fetch_poems.py` — скачивает тексты стихов с stihi.ru в `data/poems.json`
-- `scripts/build_site.py` — генерирует `index.html` из `data/poems.json`
-- `run_fetch_poems.bat` — запуск `fetch_poems.py` двойным кликом (Windows)
+The site's title names the author Dmitry Morozov, as does the stihi.ru account.
+Its "about the author" section calls him Denis.
 
-## Обновление контента
+## What is here
 
-Если у автора появились новые стихи:
+- `index.html` is the whole page. It is generated, so change it through
+  `scripts/build_site.py`, not by hand.
+- `css/style.css` and `js/main.js` are the style and the small script: the theme
+  switch, the mobile menu and scrolling.
+- `data/poems.json` holds the poems: id, title, date, source URL and text.
+- `images/denis-portrait.jpg` is the portrait in the "about the author" section.
+- `scripts/fetch_poems.py` downloads the poems it lists from stihi.ru into
+  `data/poems.json`, one polite request at a time, and `run_fetch_poems.bat`
+  starts it with a double click.
+- `scripts/build_site.py` writes `index.html` from `data/poems.json`.
+
+Both scripts need only Python's standard library, and there is no build step
+beyond them:
 
 ```
-python scripts/fetch_poems.py   # обновит data/poems.json
-python scripts/build_site.py    # пересоберёт index.html
+python scripts/fetch_poems.py
+python scripts/build_site.py
 ```
 
-Никаких сборщиков и внешних зависимостей не требуется (только стандартная библиотека Python).
+GitHub Pages serves the site from the `main` branch of the GitHub copy of this
+repository. Nothing pushes from this Gitea copy to GitHub, so a change made here
+does not reach that address by itself.
 
-## Публикация
+## Working on it
 
-Сайт полностью статический — подходит для GitHub Pages без какой-либо сборки: просто раздать содержимое репозитория как есть (ветка `main`, корень `/`).
+This repository ships no program. `.\recipe.ps1` is still its whole interface:
+`.\recipe.ps1 test` runs pytest and ruff over `.claude`, and `.\recipe.ps1 info`
+prints the metadata. The other verbs print `nothing to <verb>`. `CLAUDE.md`
+holds the rules.
+
+## License
+
+None, on purpose. The poems and the portrait are another person's work, so all
+rights stay with their owner, and a licence here is the author's decision. See
+the R-18 exception below.
